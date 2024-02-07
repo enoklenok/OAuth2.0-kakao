@@ -12,7 +12,7 @@ const Main = ({ accessToken }) => {
   // 1-1. 카카오톡 로그인 버튼 클릭시, express서버에서 카카오톡 로그인 uri를 전달받음.
   // 1-2. 해당 uri로 들어가서 로그인 시, redirect uri 라우터 컴포넌트로 이동
 
-  const navRedirectUri = async () => {
+  const getSignin = async () => {
     const { kakaoUri } = (await axios.get("http://localhost:3001/api/v1/auth"))
       .data;
     document.location.href = kakaoUri;
@@ -35,7 +35,7 @@ const Main = ({ accessToken }) => {
       ) : (
         <>
           <h1>MAIN : 로그인 실패</h1>
-          <button onClick={navRedirectUri}>카카오톡 로그인</button>
+          <button onClick={getSignin}>카카오톡 로그인</button>
         </>
       )}
     </div>

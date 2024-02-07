@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 //module
-import { setCookie } from "./cookie/cookie";
-import { AccessTokenDispatch } from "./App";
+import { AccessTokenDispatch } from "../App";
+import { setCookie } from "../cookie/cookie";
 
 const RedirectComponent = ({ accessToken }) => {
   const navigate = useNavigate();
@@ -25,7 +25,6 @@ const RedirectComponent = ({ accessToken }) => {
           }
         );
         const { accessToken, refreshToken } = data;
-        console.log(refreshToken);
         //1-4. 엑세스 토큰을 전역 상태에 저장
         dispatch({ type: "SET_TOKEN", accessToken });
         //1-5. 리프레시 토큰을 쿠키에 저장

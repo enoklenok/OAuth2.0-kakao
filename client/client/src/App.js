@@ -8,7 +8,7 @@ import authReducer from "./reducer/authReducer";
 
 //components
 import Main from "./Main";
-import RedirectComponent from "./RedirectComponent";
+import RedirectComponent from "./redirect/RedirectComponent";
 
 export const AccessTokenDispatch = createContext(null);
 const App = () => {

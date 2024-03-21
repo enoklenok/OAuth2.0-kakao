@@ -11,8 +11,7 @@ const redirect_uri = process.env.REDIRECT_URI;
 
 exports.getOAuthSignin = (req, res) => {
   // 1-1. 클라이언트의 OAuth 로그인 요청
-  // 1-2. 노드 서버에서 카카오 서버로부터 로그인 url 받기
-  // 1-3. rest-api-key와 redirect_uri, response_type을 카카오 url의 쿼리로 넣어서 해당 uri를 클라이언트에게 전달
+  // 1-3. rest-api-key와 redirect_uri, response_type을 카카오 url의 쿼리로 넣어서 해당 uri를 클라이언트에게 응답
   const response_type = "code";
   const kakaoUrl = `https://kauth.kakao.com/oauth/authorize`;
   const kakaoUri = `${kakaoUrl}?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=${response_type}`;
@@ -20,6 +19,7 @@ exports.getOAuthSignin = (req, res) => {
     message: "success",
     kakaoUri,
   };
+  console.log(kakaoUri);
   res.status(200).json(response);
 };
 
@@ -90,8 +90,8 @@ exports.getKakaoToken = async (req, res) => {
     client_secret,
     { expiresIn: refresh_token_expires_in }
   );
-  console.log(accessToken, "access");
-  console.log(refreshToken, "refresh");
+  console.log(accessToken, "accessToken");
+  console.log(refreshToken, "refreshToken");
   res.cookie("accessToken", accessToken, { httpOnly: true });
   res.cookie("refreshToken", refreshToken, { httpOnly: true });
   res.status(201).json({ message: "token success", accessToken, refreshToken });

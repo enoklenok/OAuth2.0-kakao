@@ -1,5 +1,14 @@
+// # components
+import { LogoutButton } from "@components";
+
 const Main = () => {
-  return <h1>Main</h1>;
+  return (
+    <div>
+      <LogoutButton />
+
+      <h1>Main</h1>
+    </div>
+  );
 };
 
 export default Main;

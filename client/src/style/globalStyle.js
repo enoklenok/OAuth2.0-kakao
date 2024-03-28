@@ -12,6 +12,7 @@ button {
 input {
   border: none;
   outline: none;
+  background-color : none;
 }
 
 h1 {  

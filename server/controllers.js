@@ -10,8 +10,8 @@ const client_secret = process.env.CLIENT_SECRET;
 const redirect_uri = process.env.REDIRECT_URI;
 
 exports.getOAuthSignin = (req, res) => {
-  // 1-1. 클라이언트의 OAuth 로그인 요청
-  // 1-3. rest-api-key와 redirect_uri, response_type을 카카오 url의 쿼리로 넣어서 해당 uri를 클라이언트에게 응답
+  // 1. 클라이언트의 OAuth 요청
+  // 2. rest-api-key와 redirect_uri, response_type을 카카오 url의 쿼리로 넣어서 해당 uri를 클라이언트에게 응답
   const response_type = "code";
   const kakaoUrl = `https://kauth.kakao.com/oauth/authorize`;
   const kakaoUri = `${kakaoUrl}?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=${response_type}`;
@@ -30,9 +30,9 @@ exports.getOAuthSignout = (req, res) => {
 };
 
 exports.getKakaoToken = async (req, res) => {
-  // 2-1. 클라이언트로부터 인가 코드 전달 받음
-  // 2-2. 헤더에 Content-Type,
-  // 바디에 grant_type, client_id, redirect_uri를 쿼리로 넣어서 token을 요청함.
+  // 3. 클라이언트로부터 인가 코드 전달 받음
+  // 4. 헤더에 Content-Type, 바디에 grant_type, client_id, redirect_uri를 쿼리로 넣어서 token을 요청함.
+
   // * client_secret : ON 설정한 경우, 필수로 넣어줘야함
 
   //headers
@@ -60,8 +60,8 @@ exports.getKakaoToken = async (req, res) => {
     scope,
     refresh_token_expires_in,
   } = kakaoTokenInfo.data;
-  // 3-1. 발급받은 엑세스 토큰으로 유저 정보 요청/조회
-  // 3-2. 유저 정보 저장 후, express 자체적인 토큰 발급하여 클라이언트에게 전달.
+  // 5. 발급받은 엑세스 토큰으로 유저 정보 요청/조회
+  // 6. 유저 정보 저장 후, express 자체적인 토큰 발급하여 클라이언트에게 전달.
 
   const kakaoUserUrl = "https://kapi.kakao.com/v2/user/me";
   const userInfo = await axios.get(kakaoUserUrl, {

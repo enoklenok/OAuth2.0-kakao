@@ -22,7 +22,7 @@ const Redirect = () => {
       document.location.toString()
     ).searchParams.get("code");
 
-    // 5. 추출 완료 시, Express 서버로 전달
+    // 5. 추출 완료 시 서버로 전달
     try {
       const { data } = await axios.post(`${PROTOCOL}:${PORT}${TOKEN_URL}`, {
         authorizationCode,
@@ -40,13 +40,13 @@ const Redirect = () => {
         secure: true,
         maxAge: 300,
       });
-      navigate("/");
+      // 8. 로그인 완료 화면으로 이동
+      // navigate("/");
     } catch (error) {
       console.error(error);
     }
   };
 
-  // 3. 인가코드 추출 함수 실행
   useEffect(() => {
     getAuthorizationCode();
   }, []);
